@@ -13,10 +13,12 @@ function loader.listLevels()
 end
 
 function loader.loadLevel(name)
-  -- Loads a level, returning a table like: {
-  -- enemies = {table of enemies}
-  -- items = {table of items
-  -- }
+  --[[ 
+	Loads a level, returning a table like: {
+	enemies = {table of enemies}
+	items = {table of items
+	}
+   ]]--
 
 end
 
