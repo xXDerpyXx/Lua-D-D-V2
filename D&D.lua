@@ -1,3 +1,15 @@
+
+dofile("tableSave.lua")
+math.randomseed(os.time())
+
+function ls(dir)
+  local results = {}
+  for entry in io.popen('ls -1 ' .. dir):lines() do
+    table.insert(results, entry)
+  end
+  return results
+end
+
 function load()
   -- read all the levels
   print("LOADING CONTENT")
@@ -39,7 +51,7 @@ end
 
 
 while true do -- main loop!
-	load
+	load()
 	while true do -- main game loop!
 		
 	end
