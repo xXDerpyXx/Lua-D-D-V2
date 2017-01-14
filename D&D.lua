@@ -33,3 +33,15 @@ function load()
 		end
 	end
 end
+
+
+
+
+
+while true do -- main loop!
+	load
+	while true do -- main game loop!
+		
+	end
+end
+
