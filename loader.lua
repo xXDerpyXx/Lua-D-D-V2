@@ -10,13 +10,36 @@ function ls(dir)
   return results
 end
 
+function enemyFilename(level, enemy)
+	return "levels/" .. level .. "/enemies/" .. enemy
+end
+ 
+function itemFilename(level, name)
+	return "levels/" .. level .. "/items/" .. name
+end
+ 
+function loadEnemy(levelName, enemyName)
+   return dofile(enemyFilename(levelName, enemyName))
+end
+ 
+function loadItem(levelName, itemName)
+   return dofile(itemFilename(levelName, itemName))
+end
 
 function loadEnemies(levelName)
   -- Loads the enemies into a table and returns that
+	local enemies = {}
+	for _, name in pairs(ls("levels/" .. levelName .. "/enemies")) do
+		table.insert(enemies, loadEnemy(levelName, name))
+	end
+	return enemies
 end
 
 function loadItems(levelName)
   -- Loads all the items from a level and returns a table of them.
+	local level = {name = name}
+	level["enemies"] = loadEnemies(name)
+	return level
 end
 
 function loader.listLevels()
