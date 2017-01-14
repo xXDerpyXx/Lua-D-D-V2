@@ -30,7 +30,7 @@ function loader.loadLevel(name)
 	enemies = {table of enemies}
 	items = {table of items
 	}
-   ]]--
+	]]--
 
 end
 
