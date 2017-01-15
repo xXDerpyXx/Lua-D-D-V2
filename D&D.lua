@@ -10,6 +10,8 @@ function ls(dir)
 	return results
 end
 
+displayTitle()
+
 while true do -- main loop!
 	while true do -- main game loop!
 		
