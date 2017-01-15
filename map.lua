@@ -70,6 +70,9 @@ function module.display(map,mx,my,size)
 	--os.execute("sleep .01") -- was for awesome points
 		for x=mx-size,mx+size do
 			local ch = mapGet(map, x, y) or " "
+			if x == mx and y == my then
+				ch = 'X'
+		  end
 			io.write(ch)
 		end
 		io.write("\n")
