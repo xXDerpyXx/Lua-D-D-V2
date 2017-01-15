@@ -20,12 +20,13 @@ for step=1,20 do
 	local names = {}
   for dir, pos in pairs(exits) do
 	  print(dir)--, pos.x, pos.y)
-	  map.display(myMap,x,y,5)
 		table.insert(names, dir)
   end
 	local choice = names[math.random(#names)]
 	x = exits[choice].x
 	y = exits[choice].y
 	print("Go " .. choice)
+	print("")
+	map.display(myMap,x,y,5)
 	print("")
 end
