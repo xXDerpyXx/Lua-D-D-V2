@@ -49,7 +49,7 @@ function module.create(bounds)
 			local x1, y1, x2, y2 = randomWalk(currentPosX, currentPosY,map)
 			if inBounds(bounds, x2, y2) then
 				if mapGet(map, x2, y2) ~= "O" or math.random() < .02 then
-					mapSet(map, x1, y1, "O")
+					mapSet(map, x1, y1, x1==x2 and "|" or "=")
 					mapSet(map, x2, y2, "O")
 					done = true
 					currentPosX, currentPosY = x2, y2
