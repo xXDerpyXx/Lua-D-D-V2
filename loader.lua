@@ -36,6 +36,11 @@ end
 
 function loadItems(levelName)
 	-- Loads all the items from a level and returns a table of them.
+	local items = {}
+	for _, name in pairs(ls("levels/" .. levelName .. "/items")) do
+		table.insert(items, loadItem(levelName, name))
+	end
+	return items
 end
 
 function loader.listLevels()
@@ -50,6 +55,7 @@ function loader.loadLevel(name)
 	-- }
 	local level = {name = name}
 	level["enemies"] = loadEnemies(name)
+	level["items"] = loadItems(name)
 	return level
 end
 
