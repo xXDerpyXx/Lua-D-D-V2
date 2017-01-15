@@ -48,7 +48,7 @@ function module.create(bounds)
 		while not done do
 			local x1, y1, x2, y2 = randomWalk(currentPosX, currentPosY,map)
 			if inBounds(bounds, x2, y2) then
-				if mapGet(map, x2, y2) ~= "O" or math.random() < 0.02 then
+				if mapGet(map, x2, y2) ~= "O" or math.random() < .02 then
 					mapSet(map, x1, y1, "O")
 					mapSet(map, x2, y2, "O")
 					done = true
@@ -64,6 +64,7 @@ end
 function module.display(map)
 	local bounds = map.bounds
 	for y=bounds["minY"],bounds["maxY"] do
+	os.execute("sleep .01")
 		for x=bounds["minX"],bounds["maxX"] do
 			local ch = mapGet(map, x, y) or " "
 			io.write(ch)
