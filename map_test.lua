@@ -25,7 +25,7 @@ function crawl()
 		["East"]="West"
 	}
 	local lastChoice = ""
-	for step=1,50 do
+	for step=1,1000 do
 		local exits = map.getExits(myMap, x,y)
 		print("Possible exits from " .. tostring(x) .. "," .. tostring(y))
 		local names = {}
