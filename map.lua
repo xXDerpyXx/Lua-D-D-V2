@@ -20,7 +20,7 @@ local function inBounds(bounds, x, y)
 	return true
 end
 
-local function randomWalk(x, y,map)
+local function randomWalk(x, y)
 	local rnd = math.random(1, 4)
 	if rnd == 1 then
 		return x, y + 1, x, y + 2
@@ -83,6 +83,22 @@ function module.travelTry(x,y,map)
 		return "FREE"
 	end
 	return "ERROR"
+end
+
+function module.getExits(map, x, y)
+	local exits = {}
+	function checkAndAdd(name, dx, dy)
+		if mapGet(map, x + dx, y + dy) ~= nil then
+			exits[name] = {
+				x = x + dx * 2,
+				y = y + dy * 2}
+		end
+	end
+	checkAndAdd("North", 0, -1)
+	checkAndAdd("South", 0, 1)
+	checkAndAdd("West", -1, 0)
+	checkAndAdd("East", 1, 0)
+	return exits
 end
 
 return module
