@@ -14,7 +14,7 @@ map.display(myMap,10,10,10)
 print "A little bit of path"
 
 local x,y = 0,0
-for step=1,20 do
+for step=1,50 do
 	local exits = map.getExits(myMap, x,y)
 	print("Possible exits from " .. tostring(x) .. "," .. tostring(y))
 	local names = {}
@@ -29,4 +29,5 @@ for step=1,20 do
 	print("")
 	map.display(myMap,x,y,5)
 	print("")
+	os.execute("sleep 0.2")
 end
