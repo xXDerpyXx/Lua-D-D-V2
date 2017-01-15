@@ -1,8 +1,5 @@
-math.randomseed(os.time())
-
-
 function createMap(bounds)
-	map = {}
+	local map = {}
 	map[0] = {}
 	map[0][0] = "O"
 	local currentPosX = 0
@@ -16,9 +13,6 @@ function createMap(bounds)
 			elseif map[currentPosX - 1] == nil then
 				map[currentPosX - 1] = {}
 			end
-			print(currentPosX+1)
-			print(map[currentPosX+1])
-			print(currentPosY)
 			local rand = math.random(1,4)
 			if rand == 4 then
 				if currentPosX - 1 > bounds["minX"] then
@@ -70,6 +64,8 @@ function displayMap(map, bounds)
 	end
 end
 
+
+math.randomseed(os.time())
 size = {}
 size["maxX"] = 15
 size["maxY"] = 15
