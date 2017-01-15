@@ -64,7 +64,7 @@ end
 function module.display(map)
 	local bounds = map.bounds
 	for y=bounds["minY"],bounds["maxY"] do
-	os.execute("sleep .01")
+	--os.execute("sleep .01") -- was for awesome points
 		for x=bounds["minX"],bounds["maxX"] do
 			local ch = mapGet(map, x, y) or " "
 			io.write(ch)
