@@ -60,15 +60,15 @@ function module.create(bounds)
 	local eX = currentPosX
 	local eY = currentPosY
 	mapSet(map, eX, eY, "E")
-	mapSet(map, 0, 0, "X")
+	mapSet(map, 0, 0, "S")
 	return map
 end
 
-function module.display(map)
+function module.display(map,mx,my,size)
 	local bounds = map.bounds
-	for y=bounds["minY"],bounds["maxY"] do
+	for y=my-size,my+size do
 	--os.execute("sleep .01") -- was for awesome points
-		for x=bounds["minX"],bounds["maxX"] do
+		for x=mx-size,mx+size do
 			local ch = mapGet(map, x, y) or " "
 			io.write(ch)
 		end
