@@ -73,4 +73,13 @@ function module.display(map)
 	end
 end
 
+function module.travelTry(x,y,map)
+	if map[x][y] == nil then
+		return "BLOCKED"
+	else
+		return "FREE"
+	end
+	return "ERROR"
+end
+
 return module
