@@ -48,10 +48,9 @@ end
 
 
 
-
+dofile("title.lua")
 
 while true do -- main loop!
-	load()
 	while true do -- main game loop!
 		
 	end
