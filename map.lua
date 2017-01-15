@@ -42,13 +42,13 @@ function module.create(bounds)
 	local currentPosY = 0
 	local currentPosX = 0
 	mapSet(map, 0, 0, "O")
-	for i = 1,100 do
+	for i = 1,50 do
 		-- Walk around (in bounds) until we find a non "O"
 		local done = false
 		while not done do
 			local x1, y1, x2, y2 = randomWalk(currentPosX, currentPosY,map)
 			if inBounds(bounds, x2, y2) then
-				if mapGet(map, x2, y2) ~= "O" or math.random() < .05 then
+				if mapGet(map, x2, y2) ~= "O" or math.random() < 0.02 then
 					mapSet(map, x1, y1, "O")
 					mapSet(map, x2, y2, "O")
 					done = true

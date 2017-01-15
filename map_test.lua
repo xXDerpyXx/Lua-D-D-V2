@@ -2,10 +2,10 @@ local map = require "map"
 
 math.randomseed(os.time())
 size = {}
-size["maxX"] = 20
-size["maxY"] = 20
-size["minX"] = -20
-size["minY"] = -20
+size["maxX"] = 10
+size["maxY"] = 10
+size["minX"] = -10
+size["minY"] = -10
 
 myMap = map.create(size)
 map.display(myMap)
