@@ -48,6 +48,7 @@ function crawl()
 		print("\x1b[2J")
 		map.display(myMap,x,y,5)
 		os.execute("sleep 0.1")
+	end
 end
 
 crawl()
