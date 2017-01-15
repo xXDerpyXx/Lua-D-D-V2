@@ -42,7 +42,7 @@ function module.create(bounds)
 	local currentPosY = 0
 	local currentPosX = 0
 	mapSet(map, 0, 0, "O")
-	for i = 1,50 do
+	for i = 1,100 do
 		-- Walk around (in bounds) until we find a non "O"
 		local done = false
 		while not done do
@@ -57,6 +57,7 @@ function module.create(bounds)
 			end
 		end
 	end
+	mapSet(map, 0, 0, "X")
 	return map
 end
 
