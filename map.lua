@@ -71,7 +71,7 @@ function module.display(map,mx,my,size)
 		for x=mx-size,mx+size do
 			local ch = mapGet(map, x, y) or " "
 			if x == mx and y == my then
-				ch = 'X'
+				ch = '\x1b[32mX\x1b[0m'
 		  end
 			io.write(ch)
 		end
