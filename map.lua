@@ -1,66 +1,63 @@
+
+function mapSet(map, x, y, value)
+	if map[x] == nil then map[x] = {} end
+	map[x][y] = value
+end
+
+function mapGet(map, x, y)
+	if map[x] == nil then
+		return nil
+	end
+	return map[x][y]
+end
+
+function inBounds(bounds, x, y)
+	if x < bounds["minX"] then return false end
+	if x > bounds["maxX"] then return false end
+	if y < bounds["minY"] then return false end
+	if y > bounds["maxY"] then return false end
+	return true
+end
+
+function randomWalk(x, y)
+	local rnd = math.random(1, 4)
+	if rnd == 1 then
+		return x, y + 1
+	elseif rnd == 2 then
+		return x, y - 1
+	elseif rnd == 3 then
+		return x + 1, y
+	elseif rnd == 4 then
+		return x - 1, y
+	end
+	return x, y -- Shouldn't be possible?
+end
+
 function createMap(bounds)
 	local map = {}
-	map[0] = {}
-	map[0][0] = "O"
-	local currentPosX = 0
 	local currentPosY = 0
+	local currentPosX = 0
 	for i = 1,50 do
-		while true do --currentPosX + 1 and map[currentPosX + 1] and currentPosY
-			if map[currentPosX] == nil then
-				map[currentPosX] = {}
-			elseif map[currentPosX + 1] == nil then
-				map[currentPosX + 1] = {}
-			elseif map[currentPosX - 1] == nil then
-				map[currentPosX - 1] = {}
-			end
-			local rand = math.random(1,4)
-			if rand == 4 then
-				if currentPosX - 1 > bounds["minX"] then
-					map[currentPosX - 1][currentPosY] = "O"
-					currentPosX = currentPosX - 1
-					break
-				end
-			end
-			if rand == 3 then
-				if currentPosX + 1 < bounds["maxX"] then
-					map[currentPosX + 1][currentPosY] = "O"
-					currentPosX = currentPosX + 1
-					break
-				end
-			end
-			if rand == 2 then
-				if currentPosY + 1 < bounds["maxY"] then
-					map[currentPosX][currentPosY + 1] = "O"
-					currentPosY = currentPosY + 1
-					break
-				end
-			end
-			if rand == 1 then
-				if currentPosY - 1 > bounds["minX"] then
-					currentPosY = currentPosY - 1
-					map[currentPosX][currentPosY - 1] = "O"
-					break
-				end
+		-- Walk around (in bounds) until we find a non "O"
+		while mapGet(map, currentPosX, currentPosY) == "O" do
+			local nextX, nextY = randomWalk(currentPosX, currentPosY)
+			if inBounds(bounds, nextX, nextY) then
+				currentPosX = nextX
+				currentPosY = nextY
 			end
 		end
+		mapSet(map, currentPosX, currentPosY, "O")
 	end
 	return map
 end
 
 function displayMap(map, bounds)
 	for y=bounds["minY"],bounds["maxY"] do
-		if map[x] == nil then
-			io.write(" ")
-		else
-			for x=bounds["minX"],bounds["maxX"] do
-				if map[x][y] == nil then
-					io.write(" ")
-				else
-					io.write(map[x][y])
-				end
-			end
+		for x=bounds["minX"],bounds["maxX"] do
+			local ch = mapGet(map, x, y) or " "
+			io.write(ch)
 		end
-		print("")
+		io.write("\n")
 	end
 end
 
