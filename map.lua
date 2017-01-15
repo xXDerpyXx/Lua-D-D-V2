@@ -1,17 +1,18 @@
+local module = {}
 
-function mapSet(map, x, y, value)
+local function mapSet(map, x, y, value)
 	if map[x] == nil then map[x] = {} end
 	map[x][y] = value
 end
 
-function mapGet(map, x, y)
+local function mapGet(map, x, y)
 	if map[x] == nil then
 		return nil
 	end
 	return map[x][y]
 end
 
-function inBounds(bounds, x, y)
+local function inBounds(bounds, x, y)
 	if x < bounds["minX"] then return false end
 	if x > bounds["maxX"] then return false end
 	if y < bounds["minY"] then return false end
@@ -19,7 +20,7 @@ function inBounds(bounds, x, y)
 	return true
 end
 
-function randomWalk(x, y)
+local function randomWalk(x, y)
 	local rnd = math.random(1, 4)
 	if rnd == 1 then
 		return x, y + 1
@@ -33,8 +34,8 @@ function randomWalk(x, y)
 	return x, y -- Shouldn't be possible?
 end
 
-function createMap(bounds)
-	local map = {}
+function module.create(bounds)
+	local map = {bounds = bounds}
 	local currentPosY = 0
 	local currentPosX = 0
 	for i = 1,50 do
@@ -51,7 +52,8 @@ function createMap(bounds)
 	return map
 end
 
-function displayMap(map, bounds)
+function module.display(map)
+	local bounds = map.bounds
 	for y=bounds["minY"],bounds["maxY"] do
 		for x=bounds["minX"],bounds["maxX"] do
 			local ch = mapGet(map, x, y) or " "
@@ -61,11 +63,4 @@ function displayMap(map, bounds)
 	end
 end
 
-
-math.randomseed(os.time())
-size = {}
-size["maxX"] = 15
-size["maxY"] = 15
-size["minX"] = -15
-size["minY"] = -15
-displayMap(createMap(size),size)
+return module
