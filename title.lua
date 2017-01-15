@@ -1,4 +1,4 @@
-displayTitle()
+function displayTitle()
 	print "#######                   #######"
 	print " #     #      ####         #     #"
 	print " #      #    #    #        #      #"
