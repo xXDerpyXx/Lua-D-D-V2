@@ -57,6 +57,9 @@ function module.create(bounds)
 			end
 		end
 	end
+	local eX = currentPosX
+	local eY = currentPosY
+	mapSet(map, eX, eY, "E")
 	mapSet(map, 0, 0, "X")
 	return map
 end
