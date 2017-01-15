@@ -21,24 +21,22 @@ local function inBounds(bounds, x, y)
 end
 
 local function randomWalk(x, y,map)
-	while true do
-		local rnd = math.random(1, 4)
-		if rnd == 1 and (mapGet(map,x,y+2) ~="O" or math.random(1,50) == 25) then
-			mapSet(map, x, y+1, "O")
-			return x, y + 2
-		end
-		if rnd == 2 and (mapGet(map,x,y-2) ~="O" or math.random(1,50) == 25) then
-			mapSet(map, x, y-1, "O")
-			return x, y - 2
-		end
-		if rnd == 3 and (mapGet(map,x+2,y) ~="O" or math.random(1,50) == 25) then
-			mapSet(map, x+1, y, "O")
-			return x + 2, y
-		end
-		if rnd == 4 and (mapGet(map,x-2,y) ~="O" or math.random(1,50) == 25) then
-			mapSet(map, x-1, y, "O")
-			return x - 2, y
-		end
+	local rnd = math.random(1, 4)
+	if rnd == 1 and (mapGet(map,x,y+2) ~="O" or math.random(1,50) == 25) then
+		mapSet(map, x, y+1, "O")
+		return x, y + 2
+	end
+	if rnd == 2 and (mapGet(map,x,y-2) ~="O" or math.random(1,50) == 25) then
+		mapSet(map, x, y-1, "O")
+		return x, y - 2
+	end
+	if rnd == 3 and (mapGet(map,x+2,y) ~="O" or math.random(1,50) == 25) then
+		mapSet(map, x+1, y, "O")
+		return x + 2, y
+	end
+	if rnd == 4 and (mapGet(map,x-2,y) ~="O" or math.random(1,50) == 25) then
+		mapSet(map, x-1, y, "O")
+		return x - 2, y
 	end
 	return x, y -- Shouldn't be possible? [its not possible]
 end
@@ -47,7 +45,7 @@ function module.create(bounds)
 	local map = {bounds = bounds}
 	local currentPosY = 0
 	local currentPosX = 0
-	for i = 1,50 do
+	for i = 1,100 do
 		-- Walk around (in bounds) until we find a non "O"
 		while mapGet(map, currentPosX, currentPosY) == "O" do
 			local nextX, nextY = randomWalk(currentPosX, currentPosY,map)
@@ -58,6 +56,7 @@ function module.create(bounds)
 		end
 		mapSet(map, currentPosX, currentPosY, "O")
 	end
+	mapSet(map, 0, 0, "X")
 	return map
 end
 
