@@ -8,14 +8,14 @@ function module.autoDetect()
 	if output == "Linux" then
 		output = "Linux"
 	else
-		output = "win"
+		output = "windows"
 	end
 	return output
 end
 
 function module.getOS()
 	HostOS = module.autoDetect()
-  return HostOS
+	return HostOS
 end
 
 function module.changeOS(OS)
@@ -30,6 +30,7 @@ end
 function module.loadDir(dir)
   -- List all the files in a directory as an array.
   local results = {}
+  local miniOS
   if module.getOS() == "windows" then
     method = 'dir "' .. dir .. '" /b'
   else
