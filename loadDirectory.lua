@@ -2,10 +2,10 @@ local module = {}
 
 local HostOS = "linux"
 
---[[
+
 function module.autoDetect()
 	local output = "Linux"
-	output = io.popen("uname")
+	output = io.popen("uname -s"):read("*l")
 	if output == "Linux" then
 		output = "linux"
 	else
@@ -13,10 +13,11 @@ function module.autoDetect()
 	end
 	return output
 end
-]]--
+
 
 
 function module.getOS()
+	HostOS = module.autoDetect()
 	return HostOS
 end
 
