@@ -1,13 +1,6 @@
 local loader = {}
 
-function ls(dir)
-	-- List all the files in a directory as an array.
-	local results = {}
-	for entry in io.popen('ls -1 ' .. dir):lines() do
-		table.insert(results, entry)
-	end
-	return results
-end
+local ld = require("loadDirectory")
 
 function enemyFilename(level, enemy)
 	return "levels/" .. level .. "/enemies/" .. enemy
@@ -28,7 +21,7 @@ end
 function loadEnemies(levelName)
 	-- Loads the enemies into a table and returns that
 	local enemies = {}
-	for _, name in pairs(ls("levels/" .. levelName .. "/enemies")) do
+	for _, name in pairs(ld.loadDir("levels/" .. levelName .. "/enemies")) do
 		table.insert(enemies, loadEnemy(levelName, name))
 	end
 	return enemies
@@ -37,7 +30,7 @@ end
 function loadItems(levelName)
 	-- Loads all the items from a level and returns a table of them.
 	local items = {}
-	for _, name in pairs(ls("levels/" .. levelName .. "/items")) do
+	for _, name in pairs(ld.loadDir("levels/" .. levelName .. "/items")) do
 		table.insert(items, loadItem(levelName, name))
 	end
 	return items
@@ -45,7 +38,7 @@ end
 
 function loader.listLevels()
 	-- Returns a list of all the level names detected
-	return ls("levels")
+	return ld.loadDir("levels")
 end
 
 function loader.loadLevel(name)
