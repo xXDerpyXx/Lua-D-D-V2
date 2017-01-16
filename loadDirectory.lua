@@ -2,7 +2,7 @@ local module = {}
 
 local HostOS = "linux"
 
-local function autoDetect()
+function module.autoDetect()
 	local output = "Linux"
 	output = io.popen("uname")
 	if output == "Linux" then
@@ -10,7 +10,7 @@ local function autoDetect()
 	else
 		output = "win"
 	end
-	return autoOS
+	return output
 end
 
 function module.getOS()
