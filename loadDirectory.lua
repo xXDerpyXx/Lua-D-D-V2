@@ -19,7 +19,7 @@ function module.loadDir(dir)
   -- List all the files in a directory as an array.
   local results = {}
   if HostOS == "windows" then
-    method = 'dir "' .. dir .. '" /b /ad'
+    method = 'dir "' .. dir .. '" /b'
   else
     method = 'ls  -1 ' .. dir
   end
