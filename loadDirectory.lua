@@ -14,7 +14,7 @@ function module.autoDetect()
 end
 
 function module.getOS()
-	HostOS = autoDetect()
+	HostOS = module.autoDetect()
   return HostOS
 end
 
