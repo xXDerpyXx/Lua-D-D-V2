@@ -47,7 +47,7 @@ function module.loadPlayer(playerNum)
 end
 
 function module.createPlayer(player) -- Creates a player file and returns the number for it
-	io.popen("mkdir playerSaves")
+	--io.popen("mkdir playerSaves")
 	for num=1,math.huge do
 		local file = io.open("playerSaves/plr"..num..".lua")
 		if file == nil then
