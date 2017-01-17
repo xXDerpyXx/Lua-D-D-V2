@@ -40,6 +40,10 @@ function loader.listLevels()
 	-- Returns a list of all the level names detected
 	return ld.loadDir("levels")
 end
+function loader.listGames()
+	-- Returns a list of all the level names detected
+	return ld.loadDir("playerSaves")
+end
 
 function loader.loadLevel(name)
 	-- Loads a level, returning a table like: {

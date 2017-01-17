@@ -13,6 +13,8 @@ if ld.autoDetect() == "Linux" then
 	linux = true
 end
 
+linux = true
+
 function setFG(r, g, b)
 	local code = r*36 + g * 6 + b + 16
 	io.write("\x1b[38;5;" .. code .. "m")
