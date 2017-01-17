@@ -5,8 +5,14 @@ math.randomseed(os.time())
 --local ld = require("loadDirectory")
 local loader = require("loader")
 local map = require("map")
+local player = require("player")
 
 menuInput = nil
+
+function playerCreation()
+	
+end
+
 
 while menuInput ~="5" do -- main loop!
 	while menuInput ~= "1" and menuInput ~= "2" and menuInput ~= "5" do

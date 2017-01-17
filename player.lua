@@ -1,11 +1,12 @@
+local module = {}
 local ld = require("loadDirectory")
 dofile("tableSave.lua")
 
-function getPlayers() -- Returns a list of all players
+function module.getPlayers() -- Returns a list of all players
 	return ld.loadDir("playerSaves")
 end
 
-function getStat(player,stat) -- Returns the value of a stat in the player
+function module.getStat(player,stat) -- Returns the value of a stat in the player
 	if player == nil then
 		print("ERROR: Player is nil!")
 	end
@@ -16,7 +17,7 @@ function getStat(player,stat) -- Returns the value of a stat in the player
 	return player[stat]
 end
 
-function setStat(player,stat,val) -- Sets the stat in the player to a value
+function module.setStat(player,stat,val) -- Sets the stat in the player to a value
 	if player[stat] == nil then
 		print("ERROR: Stat "..stat.." doesnt exist!")
 		return nil
@@ -25,7 +26,7 @@ function setStat(player,stat,val) -- Sets the stat in the player to a value
 	return player --new player table
 end
 
-function savePlayer(player, playerNum) -- Saves the player (a table) to a file
+function module.savePlayer(player, playerNum) -- Saves the player (a table) to a file
 	local file = io.open("playerSaves/plr"..playerNum..".lua")
 	if file == nil then
 		print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
@@ -35,7 +36,7 @@ function savePlayer(player, playerNum) -- Saves the player (a table) to a file
 	return player
 end
 
-function loadPlayer(playerNum)
+function module.loadPlayer(playerNum)
 	local file = io.open("playerSaves/plr"..playerNum..".lua")
 	if file == nil then
 		print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
@@ -45,7 +46,7 @@ function loadPlayer(playerNum)
 	return plr
 end
 
-function createPlayer(player) -- Creates a player file and returns the number for it
+function module.createPlayer(player) -- Creates a player file and returns the number for it
 	io.popen("mkdir playerSaves")
 	for num=1,math.huge do
 		local file = io.open("playerSaves/plr"..num..".lua")
@@ -55,3 +56,5 @@ function createPlayer(player) -- Creates a player file and returns the number fo
 		end
 	end
 end
+
+return module
