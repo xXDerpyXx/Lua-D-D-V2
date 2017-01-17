@@ -6,6 +6,9 @@ function getPlayers() -- Returns a list of all players
 end
 
 function getStat(player,stat) -- Returns the value of a stat in the player
+	if player == nil then
+		print("ERROR: Player is nil!")
+	end
 	if player[stat] == nil then
 		print("ERROR: Stat "..stat.." doesnt exist!")
 		return nil
@@ -43,6 +46,7 @@ function loadPlayer(playerNum)
 end
 
 function createPlayer(player) -- Creates a player file and returns the number for it
+	io.popen("mkdir playerSaves")
 	for num=1,math.huge do
 		local file = io.open("playerSaves/plr"..num..".lua")
 		if file == nil then
