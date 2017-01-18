@@ -3,6 +3,7 @@ dofile("tableSave.lua")
 math.randomseed(os.time())
 
 --local ld = require("loadDirectory")
+local class = require("class")
 local loader = require("loader")
 local map = require("map")
 local player = require("player")
@@ -10,33 +11,7 @@ local player = require("player")
 menuInput = nil
 
 function playerCreation()
-	local stats = {}
-	io.write("Name:")
-	input = io.read("*line")
-	stats["name"] = input
-	print("")
-	print("Pick a class")
-	print("Rogue -- Very rounded, though not particularly good at much.")
-	print("Brute -- Strong as an Ox, though, also dumb as one.")
-	print("Mage -- Smart and good at sorcery, but weak and cowardly.")
-	print("Knight -- Strong, brave, bold! but not the brightest or fastest.")
-	print("")
-	io.write(":")
-	input = io.read("*line")
-	if string.lower(input) == "rogue" then
-		player["defs"] = 5 --sharp defense
-		player["defb"] = 5 --blunt defense
-		player["defm"] = 5 --magic defense
-		player["dex"] = 5 --dexterity
-		player["str"] = 5 --strength
-		player["int"] = 5 --intelligence
-		player["spd"] = 5 --speed
-		player["luk"] = 5 --luck
-		player["xp"] = 0 --experience
-		player["lvl"] = 1 --level
-		player["mhp"] = 15 --maxHP
-		player["hp"] = 15 --HP
-	end
+	local stats = class.chooseClass()
 	num = player.createPlayer(stats)
 	player.savePlayer(stats,num)
 	return stats
@@ -47,7 +22,7 @@ function loadGame()
 	allGames = loader.listGames()
 	for k,v in pairs(allGames) do
 		local tempPlayer = player.loadPlayer(k)
-		print(k.."   "..tempPlayer["name"])
+		print(k.."   "..tempPlayer["name"].."   "..tempPlayer["class"])
 	end
 	while allGames[tonumber(input)] == nil do
 		io.write("Player:")
@@ -74,10 +49,12 @@ while menuInput ~="5" do -- main loop!
 		end
 		if menuInput == "2" then
 			stats = playerCreation()
+			print(stats["name"].." the "..stats["class"].." was created!")
 		end
 	end
 	if menuInput == "1" then
 		stats = loadGame()
+		print("Welcome back "..stats["name"].."!")
 	end
 	if menuInput == "2" or menuInput == "1" then
 		while true do -- main game loop!
