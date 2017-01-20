@@ -7,14 +7,17 @@ local class = require("class")
 local loader = require("loader")
 local map = require("map")
 local player = require("player")
-local inv  = require("inventory")
+local inventory  = require("inventory")
 
 menuInput = nil
 
 function playerCreation()
 	local stats = class.chooseClass()
 	num = player.createPlayer(stats)
+	inv = {}
+	inventory.createInventory(inv,num)
 	player.savePlayer(stats,num)
+	stats["num"]=num
 	return stats
 end
 
@@ -40,6 +43,11 @@ function loadInv(num)
 	return inv.loadInventory(num)
 end
 
+function newLevel()
+	local levels = loader.listLevels()
+	local level = levels[1]
+	return level
+end
 
 while menuInput ~="5" do -- main loop!
 	while menuInput ~= "1" and menuInput ~= "2" and menuInput ~= "5" do
@@ -63,10 +71,23 @@ while menuInput ~="5" do -- main loop!
 	end
 	if menuInput == "1" then
 		stats = loadGame()
-		inv = loadInv()
+		inv = inventory.loadInv(player["num"])
 		print("Welcome back "..stats["name"].."!")
 	end
 	if menuInput == "2" or menuInput == "1" then
+		if player["lastLevel"] == nil then
+			level = newLevel()
+			size = {}
+			size["maxX"] = 10
+			size["maxY"] = 10
+			size["minX"] = -10
+			size["minY"] = -10
+			map = map.create(size)
+			print("You have fallen into the "..level)
+		else
+			local level = player["lastLevel"]
+			local map = player["lastMap"]
+		end
 		while true do -- main game loop!
 			
 		end

@@ -3,14 +3,9 @@ local ld = require("loadDirectory")
 dofile("tableSave.lua")
 
 
-function module.createInventory(inv) -- Creates a inventory file and returns the number for it
-	for num=1,math.huge do
-		local file = io.open("playerSaves/inv"..num..".lua")
-		if file == nil then
-			local file = io.open("playerSaves/inv"..num..".lua","w")
-			return num
-		end
-	end
+function module.createInventory(inv,num) -- Creates a inventory file and returns the number for it
+	local file = io.open("playerSaves/inv"..num..".lua","w")
+	return num
 end
 
 function module.getItem(inv,item,attribute) -- Returns the value of a stat in the inventory
