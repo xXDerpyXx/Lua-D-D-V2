@@ -43,6 +43,15 @@ function module.saveInventory(inv, playerNum) -- Saves the inventory (a table) t
 end
 
 
+function module.loadInventory(playerNum)
+	local file = io.open("playerSaves/plr"..playerNum..".lua")
+	if file == nil then
+		print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
+		return nil
+	end
+	local plr = table.load("playerSaves/inv"..playerNum..".lua")
+	return inv
+end
 
 
 

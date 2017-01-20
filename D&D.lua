@@ -7,6 +7,7 @@ local class = require("class")
 local loader = require("loader")
 local map = require("map")
 local player = require("player")
+local inv  = require("inventory")
 
 menuInput = nil
 
@@ -35,6 +36,10 @@ function loadGame()
 	return player.loadPlayer(tonumber(input))
 end
 
+function loadInv(num)
+	return inv.loadInventory(num)
+end
+
 
 while menuInput ~="5" do -- main loop!
 	while menuInput ~= "1" and menuInput ~= "2" and menuInput ~= "5" do
@@ -58,6 +63,7 @@ while menuInput ~="5" do -- main loop!
 	end
 	if menuInput == "1" then
 		stats = loadGame()
+		inv = loadInv()
 		print("Welcome back "..stats["name"].."!")
 	end
 	if menuInput == "2" or menuInput == "1" then
