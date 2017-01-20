@@ -13,26 +13,26 @@ function module.createInventory(inv) -- Creates a inventory file and returns the
 	end
 end
 
-function module.getItem(inv,item) -- Returns the value of a stat in the player
+function module.getItem(inv,item,attribute) -- Returns the value of a stat in the inventory
 	if inv == nil then
 		print("ERROR: Inventory is nil!")
 	end
-	if inv[item] == nil then
+	if inv[item][attribute] == nil then
 		print("ERROR: Item "..item.." doesnt exist!")
 		return nil
 	end
-	return inv[item]
+	return inv[item][attribute]
 end
 
-function module.setItem(inv,item,amount) -- Sets the stat in the player to a value
+function module.setItem(inv,item,amount) -- Sets the item in the inventory to a value
 	if inv[item] == nil then
 		inv[item]["amount"] = inv[item]["amount"]+amount
 	end
 	inv[item] = item
-	return inv --new player table
+	return inv --new inventory table
 end
 
-function module.saveInventory(inv, playerNum) -- Saves the player (a table) to a file
+function module.saveInventory(inv, playerNum) -- Saves the inventory (a table) to a file
 	local file = io.open("playerSaves/inv"..playerNum..".lua")
 	if file == nil then
 		print("ERROR: Save file inv"..playerNum..".lua doesnt exist!")
