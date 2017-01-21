@@ -39,7 +39,7 @@ end
 function module.loadPlayer(playerNum)
 	local file = io.open("playerSaves/plr"..playerNum..".lua")
 	if file == nil then
-		print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
+		--print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
 		return nil
 	end
 	local plr = table.load("playerSaves/plr"..playerNum..".lua")

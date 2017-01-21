@@ -27,10 +27,12 @@ function loadGame()
 	allGames = loader.listGames()
 	for k,v in pairs(allGames) do
 		local tempPlayer = player.loadPlayer(k)
-		if tempPlayer["class"] ~= nil then
-			print(k.."   "..tempPlayer["name"].."   "..tempPlayer["class"])
-		else
-			print(k.."   "..tempPlayer["name"].."   CLASS NOT FOUND")
+		if tempPlayer ~= nil then
+			if tempPlayer["class"] ~= nil then
+				print(k.."   "..tempPlayer["name"].."   "..tempPlayer["class"])
+			else
+				print(k.."   "..tempPlayer["name"].."   CLASS NOT FOUND")
+			end
 		end
 	end
 	while allGames[tonumber(input)] == nil do
