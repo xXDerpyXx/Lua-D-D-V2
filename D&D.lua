@@ -85,10 +85,13 @@ while menuInput ~="5" do -- main loop!
 			size["minY"] = -10
 			map = map.create(size)
 			print("You have fallen into the "..level)
+			player["lastLevel"] = level
+			player["lastMap"] = map 
 		else
 			local level = player["lastLevel"]
 			local map = player["lastMap"]
 		end
+		player.savePlayer(player,)
 		while true do -- main game loop!
 			processCommand()
 		end
