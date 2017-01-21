@@ -50,7 +50,7 @@ function module.loadInventory(playerNum)
 		print("ERROR: Save file plr"..playerNum..".lua doesnt exist!")
 		return nil
 	end
-	local plr = table.load("playerSaves/inv"..playerNum..".lua")
+	local inv = table.load("playerSaves/inv"..playerNum..".lua")
 	return inv
 end
 

@@ -16,7 +16,16 @@ function playerCreation()
 	local stats = class.chooseClass()
 	num = player.createPlayer(stats)
 	inv = {}
+	
+	
 	inventory.createInventory(inv,num)
+	inv[1] = {}
+	inv[1]["name"] = "basic stick"
+	inv[1]["amount"] = 1
+	inv[1]["potency"] = 5
+	inv[1]["attackType"] = "B"
+	inv[1]["attackMessage"] = "smack"
+	inventory.saveInventory(inv,num)
 	stats["num"]=num
 	player.savePlayer(stats,num)
 	return stats
@@ -43,7 +52,7 @@ function loadGame()
 end
 
 function loadInv(num)
-	return inv.loadInventory(num)
+	return inventory.loadInventory(num)
 end
 
 function newLevel()
@@ -74,7 +83,7 @@ while menuInput ~="5" do -- main loop!
 	end
 	if menuInput == "1" then
 		stats = loadGame()
-		inv = inventory.loadInv(stats["num"])
+		inv = inventory.loadInventory(stats["num"])
 		print("Welcome back "..stats["name"].."!")
 	end
 	if menuInput == "2" or menuInput == "1" then
