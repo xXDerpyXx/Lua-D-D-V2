@@ -8,6 +8,7 @@ local loader = require("loader")
 local map = require("map")
 local player = require("player")
 local inventory  = require("inventory")
+local command = require("command")
 
 menuInput = nil
 
@@ -30,7 +31,7 @@ function loadGame()
 			print(k.."   "..tempPlayer["name"].."   "..tempPlayer["class"])
 		else
 			print(k.."   "..tempPlayer["name"].."   CLASS NOT FOUND")
-		end	
+		end
 	end
 	while allGames[tonumber(input)] == nil do
 		io.write("Player:")
@@ -89,7 +90,7 @@ while menuInput ~="5" do -- main loop!
 			local map = player["lastMap"]
 		end
 		while true do -- main game loop!
-			
+			processCommand()
 		end
 	end
 end
