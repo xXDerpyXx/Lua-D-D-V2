@@ -25,12 +25,24 @@ function displayPlayer()
   print("Magic defense: "..stats["defm"])
 end
 
+function displayInv()
+	if inv ~= nil then
+		print("Inventory")
+		for k,v in pairs(inv) do
+		print(k.." "..inv[k]["name"].."x"..inv[k]["amount"].." "..inv[k]["attackType"])
+		end
+	else
+		print("You left your backpack at home!")
+	end
+end
+
 -- MAIN FUNCTIONS --
 
 commands = {
   -- Format: ["Command name"] = {"Description of the command", Command function}
   ["help"] = {"Displays descriptions about each command", help},
-  ["player"] = {"Displays your stats", displayPlayer}
+  ["player"] = {"Displays your stats", displayPlayer},
+  ["inv"] = {"Displays your inventory", displayInv}
 }
 
 function processCommand()
