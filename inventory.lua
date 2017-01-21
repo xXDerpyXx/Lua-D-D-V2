@@ -8,22 +8,28 @@ function module.createInventory(inv,num) -- Creates a inventory file and returns
 	return num
 end
 
-function module.getItem(inv,item,attribute) -- Returns the value of a stat in the inventory
+function module.getItem(inv,item) -- Returns the value of a stat in the inventory
 	if inv == nil then
 		print("ERROR: Inventory is nil!")
 	end
-	if inv[item][attribute] == nil then
-		print("ERROR: Item "..item.." doesnt exist!")
+	if inv[item] == nil then
+		--print("ERROR: Item "..item.." doesnt exist!")
 		return nil
 	end
-	return inv[item][attribute]
+	return inv[item]
 end
 
 function module.setItem(inv,item,amount) -- Sets the item in the inventory to a value
 	if inv[item] == nil then
+		inv[item] = item
+	end
+	if inv[item]["amount"] == nil then
+		inv[item]["amount"] = 1
+	end
+	if inv[item] ~= nil then
 		inv[item]["amount"] = inv[item]["amount"]+amount
 	end
-	inv[item] = item
+	
 	return inv --new inventory table
 end
 
