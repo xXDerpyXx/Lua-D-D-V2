@@ -17,8 +17,8 @@ function playerCreation()
 	num = player.createPlayer(stats)
 	inv = {}
 	inventory.createInventory(inv,num)
-	player.savePlayer(stats,num)
 	stats["num"]=num
+	player.savePlayer(stats,num)
 	return stats
 end
 
@@ -72,11 +72,11 @@ while menuInput ~="5" do -- main loop!
 	end
 	if menuInput == "1" then
 		stats = loadGame()
-		inv = inventory.loadInv(player["num"])
+		inv = inventory.loadInv(stats["num"])
 		print("Welcome back "..stats["name"].."!")
 	end
 	if menuInput == "2" or menuInput == "1" then
-		if player["lastLevel"] == nil then
+		if stats["lastLevel"] == nil then
 			level = newLevel()
 			size = {}
 			size["maxX"] = 10
@@ -85,13 +85,13 @@ while menuInput ~="5" do -- main loop!
 			size["minY"] = -10
 			map = map.create(size)
 			print("You have fallen into the "..level)
-			player["lastLevel"] = level
-			player["lastMap"] = map 
+			stats["lastLevel"] = level
+			stats["lastMap"] = map 
 		else
-			local level = player["lastLevel"]
-			local map = player["lastMap"]
+			local level = stats["lastLevel"]
+			local map = stats["lastMap"]
 		end
-		player.savePlayer(player,)
+		player.savePlayer(stats,stats["num"])
 		while true do -- main game loop!
 			processCommand()
 		end
