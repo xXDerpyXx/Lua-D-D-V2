@@ -29,7 +29,7 @@ function module.setItem(inv,item,amount) -- Sets the item in the inventory to a 
 	if inv[item] ~= nil then
 		inv[item]["amount"] = inv[item]["amount"]+amount
 	end
-	
+
 	return inv --new inventory table
 end
 
@@ -39,7 +39,7 @@ function module.saveInventory(inv, playerNum) -- Saves the inventory (a table) t
 		print("ERROR: Save file inv"..playerNum..".lua doesnt exist!")
 		return nil
 	end
-	table.save(player,"playerSaves/inv"..playerNum..".lua")
+	table.save(inv,"playerSaves/inv"..playerNum..".lua")
 	return inv
 end
 
@@ -54,6 +54,14 @@ function module.loadInventory(playerNum)
 	return inv
 end
 
+function module.addItem(inv,item)
+	for i=1,math.huge do
+		if inv[i] == nil then
+			table.insert(inv,i,item)
+			break
+		end
+	end
+end
 
 
 return module

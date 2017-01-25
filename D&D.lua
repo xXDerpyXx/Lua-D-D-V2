@@ -16,15 +16,17 @@ function playerCreation()
 	local stats = class.chooseClass()
 	num = player.createPlayer(stats)
 	inv = {}
-	
-	
+
 	inventory.createInventory(inv,num)
-	inv[1] = {}
-	inv[1]["name"] = "basic stick"
-	inv[1]["amount"] = 1
-	inv[1]["potency"] = 5
-	inv[1]["attackType"] = "B"
-	inv[1]["attackMessage"] = "smack"
+
+	local stick = {
+		["name"] = "basic stick",
+		["amount"] = 1,
+		["potency"] = 5,
+		["attackType"] = "B",
+		["attackMessage"] = "smack"
+	}
+	inventory.addItem(inv,stick)
 	inventory.saveInventory(inv,num)
 	stats["num"]=num
 	player.savePlayer(stats,num)
@@ -97,7 +99,7 @@ while menuInput ~="5" do -- main loop!
 			map = map.create(size)
 			print("You have fallen into the "..level)
 			stats["lastLevel"] = level
-			stats["lastMap"] = map 
+			stats["lastMap"] = map
 		else
 			local level = stats["lastLevel"]
 			local map = stats["lastMap"]

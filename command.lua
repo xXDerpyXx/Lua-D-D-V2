@@ -29,7 +29,7 @@ function displayInv()
 	if inv ~= nil then
 		print("Inventory")
 		for k,v in pairs(inv) do
-		print(k.." "..inv[k]["name"].."x"..inv[k]["amount"].." "..inv[k]["attackType"])
+		print(k.." "..inv[k]["name"].." x"..inv[k]["amount"].." ".." (Attack type "..inv[k]["attackType"]..")")
 		end
 	else
 		print("You left your backpack at home!")
