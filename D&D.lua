@@ -36,6 +36,10 @@ end
 function loadGame()
 	print("Pick a player!")
 	allGames = loader.listGames()
+	if #allGames == 0 then
+		return false
+	end
+
 	for k,v in pairs(allGames) do
 		local tempPlayer = player.loadPlayer(k)
 		if tempPlayer ~= nil then
@@ -85,8 +89,13 @@ while menuInput ~="5" do -- main loop!
 	end
 	if menuInput == "1" then
 		stats = loadGame()
-		inv = inventory.loadInventory(stats["num"])
-		print("Welcome back "..stats["name"].."!")
+		if stats == false then
+			menuInput = nil
+			print("Sorry!!! no players exist yet, make a new game!")
+		else
+			inv = inventory.loadInventory(stats["num"])
+			print("Welcome back "..stats["name"].."!")
+		end
 	end
 	if menuInput == "2" or menuInput == "1" then
 		if stats["lastLevel"] == nil then
