@@ -5,7 +5,7 @@ math.randomseed(os.time())
 --local ld = require("loadDirectory")
 local class = require("class")
 local loader = require("loader")
-local map = require("map")
+local mapping = require("map")
 local player = require("player")
 local inventory  = require("inventory")
 local command = require("command")
@@ -61,10 +61,20 @@ function loadInv(num)
 	return inventory.loadInventory(num)
 end
 
-function newLevel()
+function newLevel() --randomly pick a level?
 	local levels = loader.listLevels()
 	local level = levels[1]
 	return level
+end
+
+function makeBasicMap() --make a basic map, nothing silly
+	size = {}
+	size["maxX"] = 10
+	size["maxY"] = 10
+	size["minX"] = -10
+	size["minY"] = -10
+	map = mapping.create(size)
+	return map
 end
 
 while menuInput ~="5" do -- main loop!
@@ -100,18 +110,16 @@ while menuInput ~="5" do -- main loop!
 	if menuInput == "2" or menuInput == "1" then
 		if stats["lastLevel"] == nil then
 			level = newLevel()
-			size = {}
-			size["maxX"] = 10
-			size["maxY"] = 10
-			size["minX"] = -10
-			size["minY"] = -10
-			map = map.create(size)
+			map = makeBasicMap()
 			print("You have fallen into the "..level)
 			stats["lastLevel"] = level
 			stats["lastMap"] = map
+			stats["x"] = 0
+			stats["y"] = 0
 		else
 			local level = stats["lastLevel"]
 			local map = stats["lastMap"]
+			local exits = mapping.getExits(map,stats.x,stats.y)
 		end
 		player.savePlayer(stats,stats["num"])
 		while true do -- main game loop!

@@ -1,5 +1,5 @@
 local module = {}
-
+local mapping = require("map")
 local commands
 
 -- COMMANDS --
@@ -36,13 +36,27 @@ function displayInv()
 	end
 end
 
+function displayExits()
+  local map = stats["lastMap"]
+  local temp = mapping.getExits(map,stats.x,stats.y)
+  for k,v in ipairs(temp) do
+    print("you can head, "..v)
+  end
+end
+
+function displayMap()
+  local map = stats["lastMap"]
+  local temp = mapping.display(map,stats.x,stats.y,#map)
+end
 -- MAIN FUNCTIONS --
 
 commands = {
   -- Format: ["Command name"] = {"Description of the command", Command function}
   ["help"] = {"Displays descriptions about each command", help},
   ["player"] = {"Displays your stats", displayPlayer},
-  ["inv"] = {"Displays your inventory", displayInv}
+  ["inv"] = {"Displays your inventory", displayInv},
+  ["exits"] = {"Displays where you can go", displayExits},
+  ["map"] = {"DEBUG, DISPLAYS FULL MAP", displayMap}
 }
 
 function processCommand()
